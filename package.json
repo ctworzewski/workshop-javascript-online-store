@@ -1,0 +1,55 @@
+{
+    "private": true,
+    "name": "workshop-javascript-online-store",
+    "description": "",
+    "version": "0.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "Piotr Kowalski",
+        "email": "piecioshka@gmail.com",
+        "url": "https://piecioshka.pl/"
+    },
+    "scripts": {
+        "clear": "rm -rf dist/ coverage/ .nyc_output/",
+        "clear:all": "rm -rf node_modules/ && npm run clear",
+        "test": "jest --rootDir test/specs/",
+        "test:watch": "npm run test -- --watch",
+        "build": "webpack --config webpack/webpack.config.dev.js",
+        "build:prod": "webpack --config webpack/webpack.config.prod.js",
+        "watch": "webpack -w",
+        "start": "http-serve dist/",
+        "dev": "webpack-dev-server --config webpack/webpack.config.dev.js",
+        "coverage": "npm run test -- --coverage",
+        "coveralls": "npm run coverage -- --coverageReporters=text-lcov | coveralls -v",
+        "postversion": "git push --tags",
+        "predeploy": "npm version patch && git push && git push --tags",
+        "deploy": "cross-env NODE_DEBUG=gh-pages gh-pages -d dist/"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/jest": "^25.2.1",
+        "coveralls": "^3.0.11",
+        "cross-env": "^7.0.2",
+        "file-loader": "^6.0.0",
+        "gh-pages": "^2.2.0",
+        "husky": "^4.2.5",
+        "jest": "^25.2.7",
+        "lint-staged": "^10.1.3",
+        "prettier": "^2.0.4",
+        "webpack": "^4.42.1",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:piecioshka/workshop-javascript-online-store.git"
+    },
+    "engines": {
+        "node": ">=8"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    }
+}
